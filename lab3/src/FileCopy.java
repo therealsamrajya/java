@@ -1,26 +1,25 @@
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-
+import java.io.*;
 public class FileCopy {
-
     public static void main(String[] args) {
-
         try {
-            FileInputStream in = new FileInputStream("myfile.txt");
-            FileOutputStream out = new FileOutputStream("copiedfile.txt");
+            FileInputStream fis = new FileInputStream("myfile.txt");
+            FileOutputStream fos = new FileOutputStream("copiedfile.txt");
+            int i;
+            while((i=fis.read())!=-1){
 
-            int content;
-            while ((content = in.read()) != -1) {
-                out.write(content);
-            }
+                fos.write(i);
 
-            in.close();
-            out.close();
-            System.out.println("File copied");
+
+                System.out.print((char) i);
+
+            } 
+
+            fis.close();
+            fos.close();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
         } catch (IOException e) {
-            System.out.println("Error occured" + e.getMessage());
+            throw new RuntimeException(e);
         }
-
     }
-    }
+}
